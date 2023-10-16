@@ -10,63 +10,47 @@
 
 @mixin container() {
     background-color: variables.$secondary-color;
-    height: 600px;
+    height: 800px;
     width: 800px;
     border: solid 1px black;
     border-radius: 35px;
-    position: relative;
-    // display: flex;
-    // flex-direction: column;
-    // flex-wrap: wrap;
+    display: flex;
+    flex-direction: row;
     
-    // @for $i from 1 through variables.$nbreCartes {
-    //     .carte-#{$i} {
-    //         display: flex;
-    //        // top: 40px*$i;            
-    //         position: absolute;  
-    //         flex-direction: column;
-    //         // translate: 0 -30px*$i;
-    //         background-color: variables.$carte-color;
-    //         height: 125px;
-    //         width: 80px;
-    //         border: solid 1px black;
-    //         border-radius: 5px;
-    //         margin-top: 10px;
-    //         margin-left: 50px; 
-    //         transform : rotate(variables.$random*$i+deg)  ;
-    //        // z-index:$i;
-
-    //         .hautGaucheCarte{
-    //             @include signe(flex-start, flex-start);
-    //         }
+    
+    
+    
+    .carteRetourne{
+        @include carteRetourne(4,variables.$nbreCartes,30,200);
+        border: solid 1px red;
+        width: 200px;
         
-    //         .centreCarte{
-    //             @include signe(center, center);
-    //         }
+    }
+    .carteDistribue{
+        @include carte(variables.$nbreCartesDefausse);
+        border: solid 1px red;
+        width: 200px;
         
-    //         .basDroitCarte{
-    //             @include signe(flex-end, flex-end); 
-    //             .reverse{
-    //                 rotate: 180deg;
-    //             }
-    //         }
-    //     }
-    //   }
-    @include carte(variables.$nbreCartesDefausse);
-    @include carteRetourne(variables.$nbreCartes);
+    }
    
     
+    .carteCache   {
+        @include carteRetourne(10,variables.$nbreCartes,500,200);  
+        border: solid 1px red;
+        width: 200px;           
+        
+      
+    }
     
     
 }
 
-@mixin carteRetourne($monNbreCartes) {
-    @for $i from 4 through $monNbreCartes+4 {
+@mixin carteRetourne($debut, $monNbreCartes, $left, $top) {
+    @for $i from $debut through $monNbreCartes+$debut {
         .carteRetourne-#{$i} {
             display: flex;                    
             flex-direction: column;
-            background-color: variables.$carte-color;
-            background-image: url(../public/vite.svg) ;
+            background-color: variables.$carte-color;            
             height: 125px;
             width: 80px;
             border: solid 1px black;
@@ -74,25 +58,35 @@
             margin-top: 5px;
             margin-left: 50px;
             transform : rotate(90deg);
-            position: absolute;
-            top: 200px + $i*3;
-            left : 30px;
+            position: relative;
+          //  top: $top+px  ;
+           // left : $left+px;
             
+            @if($i >= 10){
+                background-image: url(../public/vite.svg) ;
+            }
             
 
             .hautGaucheCarte{
                 @include signe(flex-start, flex-start);
-                display : none;
+                @if($i >= 10){
+                    display : none;
+                }
+                
             }
         
             .centreCarte{
                 @include signe(center, center);
-                display : none;
+                @if($i >= 10){
+                    display : none;
+                }
             }
         
             .basDroitCarte{
                 @include signe(flex-end, flex-end); 
-                display : none;
+                @if($i >= 10){
+                    display : none;
+                }
                 .reverse{
                     rotate: 180deg;
                 }

@@ -1,6 +1,7 @@
 @use "variables";
 @use "mixins" as *;
 
+
 .carte{
     display: flex;
     flex-direction: column;  
@@ -10,7 +11,8 @@
     border: solid 1px black;
     border-radius: 5px;
     margin-top: 50px;
-    margin-left: 50px;    
+    margin-left: 50px; 
+    transform : rotate(variables.$random+deg)  ;   
 
     .hautGaucheCarte{
         @include signe(flex-start, flex-start);

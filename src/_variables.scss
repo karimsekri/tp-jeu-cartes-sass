@@ -1,3 +1,6 @@
+@use 'sass:math';
+
 $primary-color:#279527;
 $secondary-color:lighten($primary-color, 50%);
 $carte-color:lighten($secondary-color, 50%);
+$random : math.random(100);

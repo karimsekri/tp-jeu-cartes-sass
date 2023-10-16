@@ -52,59 +52,109 @@
     //         }
     //     }
     //   }
-    @include carte();
+    @include carte(variables.$nbreCartesDefausse);
+    @include carteRetourne(variables.$nbreCartes);
    
     
     
     
 }
 
-@mixin carte() {
-    @for $i from 1 through variables.$nbreCartesDefausse {
-        .carte-#{$i} {
-                    display: flex;                    
-                    flex-direction: column;
-                    background-color: variables.$carte-color;
-                    height: 125px;
-                    width: 80px;
-                    border: solid 1px black;
-                    border-radius: 5px;
-                    margin-top: 10px;
-                    margin-left: 50px; 
-                    transform : rotate(variables.$random*$i+deg);
+@mixin carteRetourne($monNbreCartes) {
+    @for $i from 4 through $monNbreCartes+4 {
+        .carteRetourne-#{$i} {
+            display: flex;                    
+            flex-direction: column;
+            background-color: variables.$carte-color;
+            background-image: url(../public/vite.svg) ;
+            height: 125px;
+            width: 80px;
+            border: solid 1px black;
+            border-radius: 5px;
+            margin-top: 5px;
+            margin-left: 50px;
+            transform : rotate(90deg);
+            position: absolute;
+            top: 200px + $i*3;
+            left : 30px;
+            
+            
 
-                    position: absolute;
-                    @if(variables.$random*$i >= 400){
-                        top: 400px;
-                    }@else{
-                        top: variables.$random*$i+px;
-                    }
-                    
-                    @if(variables.$random*$i*2 >= 500){
-                        left: 500px;
-                    }@else{
-                        left: variables.$random*$i*2+px;
-                    }
-                    
-                    
-                    
-                   
+            .hautGaucheCarte{
+                @include signe(flex-start, flex-start);
+                display : none;
+            }
         
-                    .hautGaucheCarte{
-                        @include signe(flex-start, flex-start);
-                    }
-                
-                    .centreCarte{
-                        @include signe(center, center);
-                    }
-                
-                    .basDroitCarte{
-                        @include signe(flex-end, flex-end); 
-                        .reverse{
-                            rotate: 180deg;
-                        }
-                    }
+            .centreCarte{
+                @include signe(center, center);
+                display : none;
+            }
+        
+            .basDroitCarte{
+                @include signe(flex-end, flex-end); 
+                display : none;
+                .reverse{
+                    rotate: 180deg;
                 }
+            } 
+            
+        }
+    }
+}
+
+@mixin carte($monNbreCartesDefausse) {
+    @for $i from 1 through $monNbreCartesDefausse {
+        .carte-#{$i} {
+            display: flex;                    
+            flex-direction: column;
+            background-color: variables.$carte-color;
+            height: 125px;
+            width: 80px;
+            border: solid 1px black;
+            border-radius: 5px;
+            margin-top: 10px;
+            margin-left: 50px; 
+            transform : rotate(variables.$random*$i+deg);
+            @if($i == 2 ){
+                color: red;
+            }@else if ($i == 3 ){
+                color: blue;
+            } 
+            
+            
+
+            position: absolute;
+            @if(variables.$random*$i >= 400){
+                top: 400px;
+            }@else{
+                top: variables.$random*$i+px;
+            }
+            
+            @if(variables.$random*$i*2 >= 500){
+                left: 500px;
+            }@else{
+                left: variables.$random*$i*2+px;
+            }
+            
+            
+            
+            
+
+            .hautGaucheCarte{
+                @include signe(flex-start, flex-start);
+            }
+        
+            .centreCarte{
+                @include signe(center, center);
+            }
+        
+            .basDroitCarte{
+                @include signe(flex-end, flex-end); 
+                .reverse{
+                    rotate: 180deg;
+                }
+            }
+        }
     }    
 }
 @mixin signe($justify, $align){

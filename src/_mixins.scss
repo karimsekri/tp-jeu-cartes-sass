@@ -16,10 +16,14 @@
     border: solid 1px black;
     border-radius: 35px;
     position: relative;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    
     @for $i from 1 through variables.$nbreCartes {
         .carte-#{$i} {
             display: flex;
-            top: 40px*$i;            
+           // top: 40px*$i;            
             position: absolute;  
             flex-direction: column;
             // translate: 0 -30px*$i;
@@ -30,8 +34,8 @@
             border-radius: 5px;
             margin-top: 10px;
             margin-left: 50px; 
-           // transform : rotate(variables.$random+deg)  ;
-            z-index:$i;
+            transform : rotate(variables.$random*$i+deg)  ;
+           // z-index:$i;
 
             .hautGaucheCarte{
                 @include signe(flex-start, flex-start);

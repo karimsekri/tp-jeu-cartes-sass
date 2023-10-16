@@ -1,0 +1,26 @@
+@use "variables";
+
+@mixin bodyFlex($justify, $align ) {
+    display: flex;
+    justify-content: $justify;
+    align-items: $align;
+    background-color: variables.$primary-color;    
+}
+
+
+@mixin container() {
+    background-color: variables.$secondary-color;
+    height: 600px;
+    width: 800px;
+    border: solid 1px black;
+    border-radius: 35px;
+}
+
+@mixin signe($justify, $align){
+    display: flex;
+    flex-direction: row;
+    justify-content: $justify;
+    align-items: $align; 
+    height: 50px ;
+    margin : 5px;
+}

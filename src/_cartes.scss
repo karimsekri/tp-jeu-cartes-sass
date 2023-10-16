@@ -1,0 +1,29 @@
+@use "variables";
+@use "mixins" as *;
+
+.carte{
+    display: flex;
+    flex-direction: column;  
+    background-color: variables.$carte-color;
+    height: 150px;
+    width: 100px;
+    border: solid 1px black;
+    border-radius: 5px;
+    margin-top: 50px;
+    margin-left: 50px;    
+
+    .hautGaucheCarte{
+        @include signe(flex-start, flex-start);
+    }
+
+    .centreCarte{
+        @include signe(center, center);
+    }
+
+    .basDroitCarte{
+        @include signe(flex-end, flex-end); 
+        .reverse{
+            rotate: 180deg;
+        }
+    }
+}
